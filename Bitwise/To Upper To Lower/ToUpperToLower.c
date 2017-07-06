@@ -35,8 +35,10 @@ void pUpper(char *_array);
 
 	printf("The string of chars you entered are: \n%s\n", strArry);
 	aLower(strArry);
+	 
 	printf("The string of chars after they are converted to lower case: \n%s\n", strArry);
 	aUpper(strArry);
+	 
 	printf("The string of chars after they are converted to upper case: \n%s\n", strArry);
 
 	getch();
