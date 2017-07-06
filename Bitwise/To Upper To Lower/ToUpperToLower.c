@@ -12,8 +12,8 @@
 //const int TO_LOW = 0x20;
 //const int TO_UP = 0xDF;
 
-#define TO_LOWER 0x20
-#define TO_UPPER 0xDF
+#define TO_LOWER 0x20              //-- 0010 0000 in binary
+#define TO_UPPER 0xDF              //-- 1101 1111 in binary
 
 void aLower(char *_array);         //-- use array notation to iterate the array
 void pLower(char *_array);         //-- use pointer notation to iterate the array
@@ -54,6 +54,12 @@ void pLower(char *strArry)
 	while(*strArry != '\0')           //-- test for NULL in string
 	{
 		*strArry++ |= TO_LOWER;       //-- bitwise "OR" *strArry with 0x20 - Hex
+/*
+if you were to enter the char A = 0x41 = 0100 0001 and " | " it with
+                                  0x20 = 0010 0000
+                                  or ----------------
+                                  0x61 = 0110 0001 = a
+*/
 	}
 }
 
@@ -85,5 +91,11 @@ void pUpper(char *strArry)
 		}
 		*strArry++ &= TO_UPPER;       //-- bitwise "and" *strArry with 0xDF - Hex
 									  //-- incriment the pointer
+/*
+if you were to enter the char a = 0x61 = 0110 0001 and " & " it with
+                                  0xDF = 1101 1111
+                              and ----------------
+                                  0x41 = 0100 0001 = A
+*/
 	}
 }
