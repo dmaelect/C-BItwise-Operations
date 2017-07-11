@@ -19,8 +19,8 @@ void strToken(char *strArry);
 	int i = 0;
 
 	printf("Enter a string < 80 chars or less > of both upper and lower case letters\n");
-	scanf("%80[^\n]s", strArry);   //-- get a string from user up to 80 chars and stop on '\n'
-
+	scanf("%80[ a-zA-Z^\n]s", strArry);   //-- get a string from user up to 80 chars and stop on '\n'
+                                              //-- I modified this to only allow: spaces, up and lower Alphabet only
 
 	strToken(strArry);             //-- tokenize the string array
 
