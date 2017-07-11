@@ -59,7 +59,7 @@ void aLower(char *strArry)
 //-- this function uses pointer notation to iterate the array
 void pLower(char *strArry)
 {
-	while(*strArry != '\0')           //-- test for NULL in string
+	while(*strArry != '\0')               //-- test for NULL in string
 	{
 		*strArry++ |= TO_LOWER;       //-- bitwise "OR" *strArry with 0x20 - Hex
 /*
@@ -90,15 +90,15 @@ void aUpper(char *strArry)
 //-- this function uses pointer notation to iterate the array
 void pUpper(char *strArry)
 {
-	while(*strArry != '\0')           //-- test for NULL in string
+	while(*strArry != '\0')               //-- test for NULL in string
 	{
 		if(*strArry == ' ')           //-- if the pointer is pointing to a "space"
 		{
-			strArry++;                //-- incriment the pointer
-			continue;                 //-- continue looping
+			strArry++;            //-- incriment the pointer
+			continue;             //-- continue looping
 		}
 		*strArry++ &= TO_UPPER;       //-- bitwise "and" *strArry with 0xDF - Hex
-									  //-- incriment the pointer
+					      //-- incriment the pointer
 /*
 if you were to enter the char a = 0x61 = 0110 0001 and " & " it with
                                   0xDF = 1101 1111
