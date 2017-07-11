@@ -19,8 +19,7 @@ void strToken(char *strArry);
 	int i = 0;
 
 	printf("Enter a string < 80 chars or less > of both upper and lower case letters\n");
-	scanf("%80[ a-zA-Z^\n]s", strArry);   //-- get a string from user up to 80 chars and stop on '\n'
-                                              //-- I modified this to only allow: spaces, up and lower Alphabet only
+	scanf("%80[^\n]s", strArry);   //-- get a string from user up to 80 chars and stop on '\n'
 
 	strToken(strArry);             //-- tokenize the string array
 
@@ -50,14 +49,14 @@ void strToken(char *strArry);
 
 void strToken(char *strArry)
 {
-	while(*strArry++ != '\0')         //-- Loop until the NULL or end of string
+	while(*strArry++ != '\0')             //-- Loop until the NULL or end of string
 	{
 		if(*strArry == ' ')           //-- if space is detected 0010 0000
 		{
-			*strArry++ <<= 3;         //-- replace the space with NULL by shifting left the bits
-									  //-- space = 0010 0000
-									  //-- shift the bits left three places
-									  //--       = 0000 0000
+			*strArry++ <<= 3;     //-- replace the space with NULL by shifting left the bits
+					      //-- space = 0010 0000
+					      //-- shift the bits left three places
+					      //--       = 0000 0000
 		}                             //-- This value gets stored in place of the
-	}                                 //-- "space" (' ') that typed in the string
+	}                                     //-- "space" (' ') that typed in the string
 }
