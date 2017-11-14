@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
 		cBinArry[strlen(cBinArry) - 1] = '\0';  //-- clear the '\n' from the array
 
 
-	//	decVal = BinToDec(cBinArry);          //-- Send the contents of array for conversion
+	//	decVal = BinToDec(cBinArry);            //-- Send the contents of array for conversion
 
 		printf("The Decimal value of %s is: %d ", cBinArry, BinToDec(cBinArry));
 		printf("\n\nPress 'q' to quit... OR \nPress ANY key to continue...\n");
@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
 		fflush(stdin);                       //-- clear the input buffer
 
 		clrscr();                            //-- clear the screen
-	}while(ch != 'q');                     //-- quit on 'q'
+	}while(ch != 'q');                           //-- quit on 'q'
 
 
 //	getchar();
@@ -72,5 +72,5 @@ int BinToDec(char *buffer)
 		strLen--;                          //-- of the "1" in the buffer string array
 	}
 
-	return decVal;                       //-- return the decimal value to caller
+	return decVal;                             //-- return the decimal value to caller
 }
