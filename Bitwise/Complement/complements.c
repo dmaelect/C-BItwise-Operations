@@ -1,4 +1,4 @@
-*
+/*
 	Daryl Newell 11/10/17
 	various opperation to show how to use bitwise opps to accomplish
 	math tasks,
