@@ -29,7 +29,9 @@
 #endif
 //-- prototype of functions
 
-typedef unsigned int UINT;           //-- define an unsigned int as UINT
+#idndef UINT
+#define UINT unsigned int;           //-- define an unsigned int as UINT
+#endif
 
 UINT DoubleIt(UINT _x);              //-- DoubleIt the value passed in with shift left op
 UINT OnesComplement(UINT _x);	     //-- claculate the one's complement via the xor op
