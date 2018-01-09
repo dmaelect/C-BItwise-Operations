@@ -19,7 +19,7 @@
 
 //-- prototype of functions
 
-#idndef UINT
+#ifndef UINT
 #define UINT unsigned int;           //-- define an unsigned int as UINT
 #endif
 
