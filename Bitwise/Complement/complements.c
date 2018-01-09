@@ -16,17 +16,7 @@
 //-- check to see if we are on a 32bit compiler or 64 bit. this is needed in the
 //-- Ones() function
 
-#if _WIN32
-#define BIT32 1
-#else
-#define BIT32 0
-#endif
 
-#if _WIN64
-#define BIT64 1
-#else
-#define BIT64 0
-#endif
 //-- prototype of functions
 
 #idndef UINT
