@@ -20,7 +20,7 @@
 //-- prototype of functions
 
 #ifndef UINT
-#define UINT unsigned int;           //-- define an unsigned int as UINT
+#define UINT unsigned int           //-- define an unsigned int as UINT
 #endif
 
 UINT DoubleIt(UINT _x);              //-- DoubleIt the value passed in with shift left op
