@@ -66,7 +66,8 @@ int CountBits(UINT number, UINT *_ones, UINT *_zeros)
 		if((number & bitMask) == 0){
 			*_zeros += 1;
 		}
-		bitMask >>= 1;
+		bitMask >>= 1;                       //-- move the mask bit to the right on 
+		                                     //-- each loop iteration to test the next bit
 	}
 
 
