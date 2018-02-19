@@ -7,9 +7,9 @@ Source		 Me
 */
 //---------------------------- Includes --------------------------------------
 #include <stdio.h>
-#include <conio.h>
+#include <conio.h>                              //-- for clrscr() function  
 #include <string.h>				//-- for strlen function
-//#include <stdlib.h>
+
 
 
 //---------------------------- #define Macros --------------------------------
