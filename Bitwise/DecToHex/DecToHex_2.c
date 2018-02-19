@@ -71,8 +71,7 @@ int main(int argc, char* argv[])
 {
 	char ch = 0;
 	char hexString[MAX_HEX_ARRAY_LENGTH] = {0};
-	unsigned int x = 4294967295;   // this is 2^32 - 1. it is the max value of an UINT
-//	char buffer[100];
+	unsigned int x = 0;                //-- 4294967295 this is 2^32 - 1. it is the max value of an UINT
 
 
 	do
@@ -93,11 +92,7 @@ int main(int argc, char* argv[])
 	}while( ch != 'q');
 
 
-//		fflush(stdin);                         //-- clear the input buffer
 
-
-
-//	getchar();
 	return 0;
 }
 //-------------------------- End Main() --------------------------------------
