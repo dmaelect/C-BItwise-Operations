@@ -1,16 +1,16 @@
 char* DecToHex( char *hexString, UINT nDecNum)
 {
 	int decVal = 0;			//-- temp to hold the converted decimal value
-	char *pTemp;			  //-- temp pointer to hold a copy of the initial
-							        //-- hexString address
+	char *pTemp;			//-- temp pointer to hold a copy of the initial
+					//-- hexString address
 
 
-	pTemp = hexString;      //-- copy the original address to pTemp;
+	pTemp = hexString;              //-- copy the original address to pTemp;
 	do
 	{
 		decVal = (nDecNum % 16);
 		switch (decVal) {
-			case 10: *hexString++ = 'A';  //-- convert 10 to A
+			case 10: *hexString++ = 'A';    //-- convert 10 to A
 				break;
 			case 11: *hexString++ = 'B';	//-- convert 11 to B
 				break;
@@ -26,11 +26,11 @@ char* DecToHex( char *hexString, UINT nDecNum)
 				break;
 		} //-- End Switch
 
-	}while(nDecNum >>= 4);    //-- divide by 19 with shift right op
+	}while(nDecNum >>= 4);          //-- divide by 19 with shift right op
 	//-- End while loop
 
 	ReverseString(pTemp);
-	hexString = pTemp;        //-- restore the original address back to hexStsring
+	hexString = pTemp;              //-- restore the original address back to hexStsring
 	pTemp = NULL;
 
 	return hexString;
