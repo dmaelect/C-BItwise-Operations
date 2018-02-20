@@ -8,74 +8,53 @@ Source		 Me
 */
 //---------------------------- Includes --------------------------------------
 #include <stdio.h>
-//#include <cstdio.h>
-#include <string.h>
+#include <conio.h>                              //-- for clrscr() function
+#include <string.h>				//-- for strlen function
+#include <stdlib.h>                             //-- for itoa() funciton
+
 
 //---------------------------- #define Macros --------------------------------
 #define UINT unsigned int
 #define MAX_HEX_ARRAY_LENGTH 128
 
+
 //---------------------------- Function declarations -------------------------
-void printBinary(unsigned int);
-char* DecToHex(char *, UINT);
-void ReverseString(char *);
+char* DecToHex(char *, UINT);                //-- uses snprintf() and the modulas to do the conversion
+char* DecToHex1( char *, UINT );             //-- uses switch() case: and modulas to do the conversion
+void ReverseString(char *);                  //-- reverse a char string array
+
 
 //---------------------------- Begin Main ------------------------------------
 int main(int argc, char* argv[])
 {
+	char ch = 0;
 	char hexString[MAX_HEX_ARRAY_LENGTH] = {0};
 	unsigned int x = 4294967295;   // this is 2^32 - 1. it is the max value of an UINT
-	char buffer[100];
-	int pos = 0, level = 0;
-//	int cx;
+//	char buffer[100];
 
-	printf("Enter a positive Decimal number to convert to Hex\n");
-	if(scanf("%u", &x)){               //-- upon entering data, reset the stdin *FP back to "zero"
-		pos = fseek(stdin, 0, 0);      //-- this will clear the input buffer, ready for new input
-		}
-//	pos = ftell(stdin);
-//	level = stdin->level;
-
-	//-- load each hex char value for HEX into the hexString Array.
-	printf(" %u is 0x%s in HEX \n", x, DecToHex(hexString, x));
-
-
-
-	getchar();
-	return 0;
-}
-//-------------------------- End Main() --------------------------------------
-
-
-//-------------------------- Begin DecToHex() --------------------------------
-//--
-//--
-//--
-//-- I used snprintf() so I would have the formated chars held in the array
-//-- that way there is no need to convert it when you want to print it out.
-char* DecToHex(char *hexString, UINT nDecNum)
-{
-	char *pTemp;                    //-- gets returned to the caller
-	int nStrLength = 0;             //-- to hold the number of bytes written
-	const int MAX_LEN = 9;			//-- 8 bytes plus the NULL to hold the hexString[]
-
-	if(nDecNum < 1)                 //-- test for invalid inpout
-		return "  --- ERROR - invalid input   ---   ";
-
-	pTemp = hexString;              //-- assign the address of hexString to pTemp
 
 	do
 	{
-	nStrLength += snprintf(hexString++, MAX_LEN, "%X", (nDecNum % 16));
-//		pHexString++;
-	}while(nDecNum >>= 4);         //-- shift the bits to the right 4 places
-								   //-- this is equivalent to dividing by 16
-	ReverseString(pTemp);          //-- the hex value is in reverse order. It needs to be flipped
+		printf("Enter a positive Decimal number to convert into Hex\n");
+		scanf("%u", &x);
+		fseek(stdin, 0, 0);     //-- Set the stdin file pointer back to 0
+								//-- this effectivley clears the input buffer
+		//-- load each hex char value for HEX into the hexString Array. and print it out
+		printf("\n%u is 0x%s in HEX \n", x, DecToHex(hexString, x));
 
-	return pTemp;        //-- return the address so it can be used in a printf() call
+		printf("\n\nPress 'q' to quit... OR \n ANY other key to continue...\n");
+
+		ch = getch();                          //-- wait for keypress
+		fseek(stdin, 0, 0);                    //-- clear input buffer
+		clrscr();                              //-- requires conio.h
+
+	}while( ch != 'q');
+
+
+//	getchar();
+	return 0;
 }
-//---------------------------- End DecToHex() --------------------------------
-
+//-------------------------- End Main() --------------------------------------
 
 //---------------------------- Begin ReverseString() -------------------------
 //-- Reverse the content of the buffer array
@@ -97,17 +76,73 @@ void ReverseString(char *buffer)
 //--------------------------- End ReverseString() -----------------------------
 
 
-//-- This function is not needed here. it can be removed if desired.
-void printBinary(unsigned int n)
+//-------------------------- Begin DecToHex() --------------------------------
+//--
+//--
+//--
+//-- I used snprintf() so I would have the formated chars held in the array
+//-- that way there is no need to convert it when you want to print it out.
+char* DecToHex(char *hexString, UINT nDecNum)
 {
-	unsigned int i;
-	unsigned mask = 1 << 15;             //-- move the 1 mask to the MSB of a 32 bit #
-	for(i = 0; i < sizeof(unsigned int) * 4 ; ++i){
-		putchar(n & mask ? '1' : '0');             //if ((n & (mask >> i)) == (mask >> i))
+	char *pTemp;                    //-- gets returned to the caller
+	const int MAX_LEN = 9;			//-- 8 bytes plus the NULL to hold the hexString[]
 
-		if ( (i + 1) % 8 == 0)
-			printf(" ");
-		n <<= 1;						 //-- shift the mask to the left 1 time
-	} //-- end for loop
-	printf("\n");
-} //-- end printBinary
+	pTemp = hexString;              //-- copy the 1st address of hexString
+
+	do{                             //-- convert the nDecNum and store it into hexString
+		snprintf(hexString++, MAX_LEN, "%X", (nDecNum % 16));
+	}while(nDecNum >>= 4);          //-- shift the bits to the right 4 places
+									//-- this is equivalent to dividing by 16
+
+
+	ReverseString(pTemp);           //-- the hex value is in reverse order. It needs to be flipped
+	hexString = pTemp;				//-- restore the pointer of hexString back to first ellememt
+	pTemp = NULL;
+
+	return hexString;       		//-- return the address so it can be used in a printf() call
+}
+//---------------------------- End DecToHex() --------------------------------
+
+//-------------------------- Begin DecToHex1() -------------------------------
+//-- This version uses switch() Case: to do the conversion
+//-- it does require the stdlib.h header file for the itoa() function
+//-- the results of this function is the exact same as that using the snprintf()
+//--
+char* DecToHex1( char *hexString, UINT nDecNum)
+{
+	int decVal = 0;			//-- temp to hold the converted decimal value
+	char *pTemp;			//-- temp pointer to hold a copy of the initial
+							//-- hexString address
+
+
+	pTemp = hexString;      //-- copy the original address to pTemp;
+	do
+	{
+		decVal = (nDecNum % 16);
+		switch (decVal) {
+			case 10: *hexString++ = 'A';    //-- convert 10 to A
+				break;
+			case 11: *hexString++ = 'B';	//-- convert 11 to B
+				break;
+			case 12: *hexString++ = 'C'; 	//-- convert 12 to C
+				break;
+			case 13: *hexString++ = 'D';	//-- convert 13 to D
+				break;
+			case 14: *hexString++ = 'E';	//-- convert 14 to E
+				break;
+			case 15: *hexString++ = 'F';	//-- convert 15 to F
+				break;
+			default : itoa(decVal, hexString++, 10);
+				break;
+		} //-- End Switch
+
+	}while(nDecNum >>= 4);    //-- divide by 19 with shift right op
+	//-- End while loop
+
+	ReverseString(pTemp);
+	hexString = pTemp;        //-- restore the original address back to hexStsring
+	pTemp = NULL;
+
+	return hexString;
+}
+//-------------------------------- End DecToHex1() ----------------------------
