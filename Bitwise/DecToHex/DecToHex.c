@@ -136,7 +136,7 @@ char* DecToHex1( char *hexString, UINT nDecNum)
 				break;
 		} //-- End Switch
 
-	}while(nDecNum >>= 4);    //-- divide by 19 with shift right op
+	}while(nDecNum >>= 4);    //-- divide by 16 with shift right op
 	//-- End while loop
 
 	ReverseString(pTemp);
